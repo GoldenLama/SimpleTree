@@ -28,19 +28,36 @@ class tree {
    }
    while(x<=t->info) TI(x,t->left);
    TI(x,t->right);
-   
-   
+   }
+  
+  void Tpre(branch *q){
+    if(q==nullptr) return;
+    printf("%d ",q->info);
+      Tpre(q->left);
+      Tpre(q->right);
+  }
+   void Tin(branch *q){
+    if(q==nullptr) return;
+      Tin(q->left);
+     printf("%d ",q->info);
+      Tin(q->right);
+   }
+  void Tpost(branch *q){
+   if(q==nullptr) return;
+      Tpost(q->left);
+      Tpost(q->right);
+    printf("%d ",q->info);
+  }
   public: 
-       tree    ();       /* κατασκευαστής: κατασκευάζει ένα κενό ΔΔΑ */ 
-  int  height    ();       /* επιστρέφει το ύψος του ΔΔΑ (το κενό ΔΔΑ έχει ύψος 0) */ 
-  void insert    (int x);  /* εισάγει τον αριθμό x στο ΔΔΑ */
-  int  search    (int x);  /* ψάχνει τον αριθμό x στο ΔΔΑ και επιστρέφει το επίπεδο στο οποίο
-                              βρίσκεται (η ρίζα βρίσκεται στο επίπεδο 1) ή 0 αν δεν υπάρχει */
-  int  min       ();       /* επιστρέφει το ελάχιστο στοιχείο του ΔΔΑ */
-  int  max       ();       /* επιστρέφει το μέγιστο στοιχείο του ΔΔΑ */
-  void inorder   ();       /* εκτυπώνει τα στοιχεία του ΔΔΑ με ενδοδιατεταγμένη διάσχιση */
-  void preorder  ();       /* εκτυπώνει τα στοιχεία του ΔΔΑ με προδιατεταγμένη διάσχιση */
-  void postorder ();       /* εκτυπώνει τα στοιχεία του ΔΔΑ με μεταδιατεταγμένη διάσχιση */
+       tree    ();      
+  int  height    ();     
+  void insert    (int x); 
+  int  search    (int x);  
+  int  min       ();      
+  int  max       ();      
+  void inorder   ();       
+  void preorder  ();      
+  void postorder ();       
 };
 
 tree::tree{root=nullptr;};
@@ -70,4 +87,31 @@ int tree::min(){
  int tree::search(int x){
   branch *q;
   q=root;
- }
+  int level=0;
+   bool fak=0;
+   while (q!=nullptr){
+     level++;
+     if(x==q->info) {fak=1; break;}
+     if (x>q->info) q=q->right;
+     q=q->left;
+   }
+   if(fak==0) return 0;
+   return level;  
+ };
+  
+  void tree::preorder(){
+   Tpre(root);
+   };
+ void tree::inorder(){
+   Tin(root);
+ };
+
+void tree::postorder(){
+  Tpost(root);
+};
+
+int main(){}
+  
+  
+  
+  
